@@ -7,7 +7,8 @@ import 'package:netflix_ui/presentaion/Search/widgets/searchtile.dart';
 class SearchResult extends StatelessWidget {
   const SearchResult({super.key});
 
-  final imgaeurl = 'https://www.themoviedb.org/t/p/original/zpCCTtuQMHiHycpsrWnW2eCrBql.jpg';
+  final imgaeurl =
+      'https://www.themoviedb.org/t/p/original/zpCCTtuQMHiHycpsrWnW2eCrBql.jpg';
 
   @override
   Widget build(BuildContext context) {

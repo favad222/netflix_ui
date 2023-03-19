@@ -15,7 +15,8 @@ class MainCard0 extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: kradias,
         image: const DecorationImage(
-          image: NetworkImage('https://www.themoviedb.org/t/p/w600_and_h900_bestv2/7OOw0O03SY4cml8ZLP3UYCcDrgY.jpg'),
+          image: NetworkImage(
+              'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/7OOw0O03SY4cml8ZLP3UYCcDrgY.jpg'),
         ),
       ),
     );

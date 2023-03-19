@@ -38,7 +38,8 @@ class VideoList extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: const [
                     CircleAvatar(
-                      backgroundImage: NetworkImage('https://www.themoviedb.org/t/p/original/kuf6dutpsT0vSVehic3EZIqkOBt.jpg'),
+                      backgroundImage: NetworkImage(
+                          'https://www.themoviedb.org/t/p/original/kuf6dutpsT0vSVehic3EZIqkOBt.jpg'),
                       radius: 30,
                     ),
                     VideoAction(icon: Icons.emoji_emotions, text: 'LoL'),

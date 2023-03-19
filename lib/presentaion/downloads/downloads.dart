@@ -1,5 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:netflix_ui/Application/downloads/downloads_bloc.dart';
 import 'package:netflix_ui/core/colors/colors.dart';
 import 'package:netflix_ui/core/sizedbox.dart';
 import 'package:netflix_ui/presentaion/widgets/appbar_widget.dart';
@@ -124,41 +126,49 @@ class Section2 extends StatelessWidget {
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.grey, fontSize: 16),
         ),
-        Container(
-          height: size.width,
-          width: size.width,
-          color: Colors.transparent,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Center(
-                child: CircleAvatar(
-                  radius: size.width * 0.30,
-                  backgroundColor: Colors.grey.withOpacity(0.5),
-                ),
-              ),
-              DownloadImge(
-                imageList: imageList[2],
-                margin: const EdgeInsets.only(left: 170, top: 50),
-                angle: 15,
-                size: Size(size.width * 0.30, size.width * 0.48),
-              ),
-              DownloadImge(
-                imageList: imageList[1],
-                margin: const EdgeInsets.only(right: 170, top: 50),
-                angle: -15,
-                size: Size(size.width * 0.30, size.width * 0.48),
-              ),
-              DownloadImge(
-                imageList: imageList[0],
-                margin: const EdgeInsets.only(bottom: 10, top: 25),
-                size: Size(
-                  size.width * 0.3,
-                  size.width * 0.50,
-                ),
-              )
-            ],
-          ),
+        BlocBuilder<DownloadsBloc, DownloadsState>(
+          builder: (context, state) {
+            return SizedBox(
+              height: size.width,
+              width: size.width,
+              child: state.isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Center(
+                          child: CircleAvatar(
+                            radius: size.width * 0.30,
+                            backgroundColor: Colors.grey.withOpacity(0.5),
+                          ),
+                        ),
+                        DownloadImge(
+                          imageList:
+                              '$imageAppenturl${state.downloads?[0].posterpath}',
+                          margin: const EdgeInsets.only(left: 170, top: 50),
+                          angle: 15,
+                          size: Size(size.width * 0.30, size.width * 0.48),
+                        ),
+                        DownloadImge(
+                          imageList:
+                              '$imageAppenturl${state.downloads?[1].posterpath}',
+                          margin: const EdgeInsets.only(right: 170, top: 50),
+                          angle: -15,
+                          size: Size(size.width * 0.30, size.width * 0.48),
+                        ),
+                        DownloadImge(
+                          imageList:
+                              '$imageAppenturl${state.downloads?[2].posterpath}',
+                          margin: const EdgeInsets.only(bottom: 10, top: 25),
+                          size: Size(
+                            size.width * 0.3,
+                            size.width * 0.50,
+                          ),
+                        )
+                      ],
+                    ),
+            );
+          },
         ),
       ],
     );
@@ -176,7 +186,8 @@ class Section3 extends StatelessWidget {
           width: double.infinity,
           child: MaterialButton(
             color: bluecolor,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
             onPressed: () {},
             child: const Text(
               'Set Up',

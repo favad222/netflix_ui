@@ -42,3 +42,8 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# ApiKey
+lib/Infracture/api_key.dart
+
+

@@ -13,7 +13,8 @@ final BorderRadius kradias30 = BorderRadius.circular(30);
 
 // image#1
 
-const mainimage = 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/cA3rx5rWJ9MKAJm86dbGpywB23f.jpg';
+const mainimage =
+    'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/cA3rx5rWJ9MKAJm86dbGpywB23f.jpg';
 
 // HomeScreenTextStyle
 
@@ -24,4 +25,7 @@ TextStyle khometextstyle = const TextStyle(
 
 // image#2
 
-const banshee = 'https://www.themoviedb.org/t/p/w533_and_h300_bestv2/mo9bfYdewzmHxnaeURB2jRPvGuX.jpg';
+const banshee =
+    'https://www.themoviedb.org/t/p/w533_and_h300_bestv2/mo9bfYdewzmHxnaeURB2jRPvGuX.jpg';
+
+const imageAppenturl = 'https://image.tmdb.org/t/p/w500';

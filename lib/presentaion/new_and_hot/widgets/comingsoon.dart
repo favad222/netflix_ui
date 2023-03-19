@@ -55,7 +55,7 @@ class ComingSoonWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-             const VideoWidget(),
+              const VideoWidget(),
               Row(
                 children: [
                   const Text(
@@ -107,4 +107,3 @@ class ComingSoonWidget extends StatelessWidget {
     );
   }
 }
-

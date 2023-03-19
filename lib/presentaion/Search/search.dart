@@ -4,7 +4,8 @@ import 'package:netflix_ui/core/sizedbox.dart';
 import 'package:netflix_ui/presentaion/Search/widgets/search_idle.dart';
 import 'package:netflix_ui/presentaion/Search/widgets/search_rs.dart';
 
-const imageurl = 'https://www.themoviedb.org/t/p/w533_and_h300_bestv2/wybmSmviUXxlBmX44gtpow5Y9TB.jpg';
+const imageurl =
+    'https://www.themoviedb.org/t/p/w533_and_h300_bestv2/wybmSmviUXxlBmX44gtpow5Y9TB.jpg';
 
 class ScreenSearch extends StatelessWidget {
   const ScreenSearch({super.key});
@@ -31,8 +32,8 @@ class ScreenSearch extends StatelessWidget {
                 style: const TextStyle(color: Colors.white),
               ),
               height,
-              // const Expanded(child: SearchIdle())
-               const Expanded(child: SearchResult())
+              const Expanded(child: SearchIdle())
+              //  const Expanded(child: SearchResult())
             ],
           ),
         ),
@@ -40,5 +41,4 @@ class ScreenSearch extends StatelessWidget {
     );
   }
 }
-
-
+ 

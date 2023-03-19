@@ -25,7 +25,8 @@ class NumberCard extends StatelessWidget {
                 borderRadius: kradias,
                 image: const DecorationImage(
                   fit: BoxFit.cover,
-                  image: NetworkImage('https://www.themoviedb.org/t/p/w600_and_h900_bestv2/bD22gfzZiYQWuRTX2NrdDveRpwX.jpg'),
+                  image: NetworkImage(
+                      'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/bD22gfzZiYQWuRTX2NrdDveRpwX.jpg'),
                 ),
               ),
             ),

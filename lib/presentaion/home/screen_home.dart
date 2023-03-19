@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:netflix_ui/core/sizedbox.dart';
 import 'package:netflix_ui/presentaion/home/widgets/background_card.dart';
 import 'package:netflix_ui/presentaion/home/widgets/number_card_tile.dart';
 import 'package:netflix_ui/presentaion/widgets/main_title_card.dart';
+
+import '../../Application/downloads/downloads_bloc.dart';
 
 ValueNotifier<bool> scrollnotifier = ValueNotifier(true);
 
@@ -12,6 +15,10 @@ class ScreenHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      BlocProvider.of<DownloadsBloc>(context)
+          .add(const DownloadsEvent.getDownloadsImage());
+    });
     return Scaffold(
       body: ValueListenableBuilder(
         valueListenable: scrollnotifier,
@@ -77,7 +84,8 @@ class ScreenHome extends StatelessWidget {
                                 ],
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Text(
                                     'Tv Shows',

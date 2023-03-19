@@ -24,10 +24,14 @@ class BottomNavi extends StatelessWidget {
           type: BottomNavigationBarType.fixed,
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(icon: Icon(Icons.collections), label: 'New & Hot'),
-            BottomNavigationBarItem(icon: Icon(Icons.emoji_emotions_outlined), label: 'Fast Laughs'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.collections), label: 'New & Hot'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.emoji_emotions_outlined),
+                label: 'Fast Laughs'),
             BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
-            BottomNavigationBarItem(icon: Icon(Icons.arrow_circle_down), label: 'Downloads'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.arrow_circle_down), label: 'Downloads'),
           ],
         );
       },
