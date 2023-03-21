@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:netflix_ui/core/colors/colors.dart';
 import 'package:netflix_ui/presentaion/FastLaughs/fast_laughs.dart';
 import 'package:netflix_ui/presentaion/Search/search.dart';
 import 'package:netflix_ui/presentaion/downloads/downloads.dart';
@@ -14,7 +13,7 @@ class MainPage extends StatelessWidget {
     const ScreenHome(),
     const ScreenNewAndHot(),
     const ScreenFastLaugh(),
-    const ScreenSearch(),
+    ScreenSearch(),
     ScreenDownloads()
   ];
 

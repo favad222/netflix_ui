@@ -1,17 +1,77 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:netflix_ui/Application/hot_and%20_new/hot_and_new_bloc.dart';
 import 'package:netflix_ui/core/colors/colors.dart';
 import 'package:netflix_ui/core/sizedbox.dart';
 import 'package:netflix_ui/presentaion/home/widgets/custom_button_widget.dart';
 import 'package:netflix_ui/presentaion/new_and_hot/widgets/video_widget.dart';
+import 'package:intl/intl.dart';
 
 class CommingSoon extends StatelessWidget {
   const CommingSoon({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: 10,
-      itemBuilder: (context, index) => const ComingSoonWidget(),
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      BlocProvider.of<HotAndNewBloc>(context).add(const LoadDataInComingSoon());
+    });
+    return RefreshIndicator(
+      onRefresh: () async {
+        BlocProvider.of<HotAndNewBloc>(context).add(const LoadDataInComingSoon());
+      },
+      child: BlocBuilder<HotAndNewBloc, HotAndNewState>(
+        builder: (context, state) {
+          if (state.isLoading) {
+            return const Center(
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+              ),
+            );
+          } else if (state.hasError) {
+            return const Center(
+              child: Text('Error loading ComingSoon Page'),
+            );
+          } else if (state.comingSoonList.isEmpty) {
+            return const Center(
+              child: Text('Coming Soon List is Empty'),
+            );
+          } else {
+            return ListView.builder(
+              padding: const EdgeInsets.only(top: 20),
+              itemCount: state.comingSoonList.length,
+              itemBuilder: (context, index) {
+                final movie = state.comingSoonList[index];
+
+                if (movie.id == null) {
+                  return const SizedBox();
+                }
+
+                String month = '';
+                String date = '';
+
+                try {
+                  final _date = DateTime.parse(movie.releaseDate!);
+                  final formatedDate = DateFormat.yMMMd('en_US').format(_date);
+                  month = formatedDate.split(' ').first.substring(0, 3).toUpperCase();
+                  date = movie.releaseDate!.split('-')[1];
+                } catch (_) {
+                  month = '';
+                  date = '';
+                }
+
+                return ComingSoonWidget(
+                  id: movie.id.toString(),
+                  month: month,
+                  day: date,
+                  posterpath: '$imageAppenturl${movie.posterPath}',
+                  movieName: movie.originalTitle ?? 'No title',
+                  description: movie.overview ?? 'No decription Available',
+                );
+              },
+            );
+          }
+        },
+      ),
     );
   }
 }
@@ -19,7 +79,20 @@ class CommingSoon extends StatelessWidget {
 class ComingSoonWidget extends StatelessWidget {
   const ComingSoonWidget({
     super.key,
+    required this.id,
+    required this.month,
+    required this.day,
+    required this.posterpath,
+    required this.movieName,
+    required this.description,
   });
+
+  final String id;
+  final String month;
+  final String day;
+  final String posterpath;
+  final String movieName;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
@@ -30,17 +103,17 @@ class ComingSoonWidget extends StatelessWidget {
           width: 50,
           height: 450,
           child: Column(
-            children: const [
+            children: [
               Text(
-                'FEB',
-                style: TextStyle(
+                month,
+                style: const TextStyle(
                   fontSize: 16,
                   color: greycolor,
                 ),
               ),
               Text(
-                '11',
-                style: TextStyle(
+                day,
+                style: const TextStyle(
                   letterSpacing: 4,
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -55,18 +128,20 @@ class ComingSoonWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const VideoWidget(),
+              VideoWidget(url: posterpath),
               Row(
                 children: [
-                  const Text(
-                    'BANSHEE',
-                    style: TextStyle(
-                      letterSpacing: -3,
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
+                  Expanded(
+                    child: Text(
+                      movieName,
+                      maxLines: 1,
+                      overflow: TextOverflow.clip,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                  const Spacer(),
                   CustomButton(
                     icon: Icons.all_out_sharp,
                     text: 'Remind Me',
@@ -84,19 +159,22 @@ class ComingSoonWidget extends StatelessWidget {
                 ],
               ),
               height,
-              const Text('Coming On Friday'),
+              Text('Coming On $day $month'),
               height,
-              const Text(
-                'BANSHEE',
-                style: TextStyle(
+              Text(
+                movieName,
+                maxLines: 1,
+                overflow: TextOverflow.clip,
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               height,
-              const Text(
-                "Landing the lead in the school musical is a dream come true for jodi,until the pressure sends her confidence - and her relationship - into a tailspain",
-                style: TextStyle(
+              Text(
+                description,
+                maxLines: 4,
+                style: const TextStyle(
                   color: greycolor,
                 ),
               )

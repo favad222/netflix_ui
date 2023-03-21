@@ -4,19 +4,40 @@ import 'package:netflix_ui/core/sizedbox.dart';
 class VideoWidget extends StatelessWidget {
   const VideoWidget({
     super.key,
+    required this.url,
   });
+
+  final String url;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
+        SizedBox(
           height: 200,
           width: double.infinity,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage(banshee),
-              fit: BoxFit.cover,
+          // decoration: BoxDecoration(
+          //   image: DecorationImage(
+          //     image: NetworkImage(url),
+          //     fit: BoxFit.cover,
+          //   ),
+          // ),
+          child: Image.network(
+            url,
+            fit: BoxFit.cover,
+            loadingBuilder: (_, child, loadingProgress) {
+              if (loadingProgress == null) {
+                return child;
+              } else {
+                return const Center(
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                  ),
+                );
+              }
+            },
+            errorBuilder: (context, error, stackTrace) => const Center(
+              child: Icon(Icons.wifi),
             ),
           ),
         ),

@@ -1,17 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:netflix_ui/Application/search/search_bloc.dart';
+import 'package:netflix_ui/Domain/core/debounce/debounce.dart';
 import 'package:netflix_ui/core/sizedbox.dart';
 import 'package:netflix_ui/presentaion/Search/widgets/search_idle.dart';
 import 'package:netflix_ui/presentaion/Search/widgets/search_rs.dart';
 
-const imageurl =
-    'https://www.themoviedb.org/t/p/w533_and_h300_bestv2/wybmSmviUXxlBmX44gtpow5Y9TB.jpg';
-
 class ScreenSearch extends StatelessWidget {
-  const ScreenSearch({super.key});
+  ScreenSearch({super.key});
+
+  final _debouncer = Debouncer(milliseconds: 1 * 1000);
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      BlocProvider.of<SearchBloc>(context).add(const Initialize());
+    });
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -30,9 +35,31 @@ class ScreenSearch extends StatelessWidget {
                   color: Colors.grey,
                 ),
                 style: const TextStyle(color: Colors.white),
+                onChanged: (value) {
+                  if (value.isEmpty) {
+                    return;
+                  }
+                  _debouncer.run(
+                    () {
+                      BlocProvider.of<SearchBloc>(context).add(
+                        SearchMovie(movieQuery: value),
+                      );
+                    },
+                  );
+                },
               ),
               height,
-              const Expanded(child: SearchIdle())
+              Expanded(
+                child: BlocBuilder<SearchBloc, SearchState>(
+                  builder: (context, state) {
+                    if (state.searchResultList.isEmpty) {
+                      return const SearchIdle();
+                    } else {
+                      return const SearchResult();
+                    }
+                  },
+                ),
+              )
               //  const Expanded(child: SearchResult())
             ],
           ),
@@ -41,4 +68,3 @@ class ScreenSearch extends StatelessWidget {
     );
   }
 }
- 

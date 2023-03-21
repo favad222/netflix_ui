@@ -143,22 +143,19 @@ class Section2 extends StatelessWidget {
                           ),
                         ),
                         DownloadImge(
-                          imageList:
-                              '$imageAppenturl${state.downloads?[0].posterpath}',
+                          imageList: '$imageAppenturl${state.downloads?[0].posterpath}',
                           margin: const EdgeInsets.only(left: 170, top: 50),
                           angle: 15,
                           size: Size(size.width * 0.30, size.width * 0.48),
                         ),
                         DownloadImge(
-                          imageList:
-                              '$imageAppenturl${state.downloads?[1].posterpath}',
+                          imageList: '$imageAppenturl${state.downloads?[1].posterpath}',
                           margin: const EdgeInsets.only(right: 170, top: 50),
                           angle: -15,
                           size: Size(size.width * 0.30, size.width * 0.48),
                         ),
                         DownloadImge(
-                          imageList:
-                              '$imageAppenturl${state.downloads?[2].posterpath}',
+                          imageList: '$imageAppenturl${state.downloads?[2].posterpath}',
                           margin: const EdgeInsets.only(bottom: 10, top: 25),
                           size: Size(
                             size.width * 0.3,
@@ -186,8 +183,7 @@ class Section3 extends StatelessWidget {
           width: double.infinity,
           child: MaterialButton(
             color: bluecolor,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
             onPressed: () {},
             child: const Text(
               'Set Up',

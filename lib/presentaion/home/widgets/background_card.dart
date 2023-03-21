@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:netflix_ui/Application/downloads/downloads_bloc.dart';
 import 'package:netflix_ui/core/colors/colors.dart';
 import 'package:netflix_ui/core/sizedbox.dart';
 import 'package:netflix_ui/presentaion/home/widgets/custom_button_widget.dart';
@@ -10,14 +12,18 @@ class BackgroundCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          height: 600,
-          width: double.infinity,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage(mainimage),
-            ),
-          ),
+        BlocBuilder<DownloadsBloc, DownloadsState>(
+          builder: (context, state) {
+            return Container(
+              height: 600,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage("$imageAppenturl${state.downloads[2].posterpath}"),
+                ),
+              ),
+            );
+          },
         ),
         Positioned(
           bottom: 10,

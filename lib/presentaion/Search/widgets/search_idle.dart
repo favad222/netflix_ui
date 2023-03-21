@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:netflix_ui/Application/search/search_bloc.dart';
 import 'package:netflix_ui/core/colors/colors.dart';
 import 'package:netflix_ui/core/sizedbox.dart';
 import 'package:netflix_ui/presentaion/Search/search.dart';
@@ -16,11 +18,34 @@ class SearchIdle extends StatelessWidget {
         const Searchtile(title: 'Top Searches'),
         height,
         Expanded(
-          child: ListView.separated(
-            shrinkWrap: true,
-            itemBuilder: (context, index) => const TopSearchViw(),
-            separatorBuilder: (context, index) => height20,
-            itemCount: 20,
+          child: BlocBuilder<SearchBloc, SearchState>(
+            builder: (context, state) {
+              if (state.isloading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (state.iserror) {
+                return const Center(
+                  child: Text('Error While Getting data'),
+                );
+              } else if (state.idleList.isEmpty) {
+                return const Center(
+                  child: Text('List is Emty'),
+                );
+              }
+              return ListView.separated(
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  final movie = state.idleList[index];
+                  return TopSearchViw(
+                    title: movie.originalTitle ?? 'No Title',
+                    imageUrl: '$imageAppenturl${movie.backdroppath}',
+                  );
+                },
+                separatorBuilder: (context, index) => height20,
+                itemCount: state.idleList.length,
+              );
+            },
           ),
         )
       ],
@@ -29,7 +54,13 @@ class SearchIdle extends StatelessWidget {
 }
 
 class TopSearchViw extends StatelessWidget {
-  const TopSearchViw({super.key});
+  const TopSearchViw({
+    super.key,
+    required this.title,
+    required this.imageUrl,
+  });
+  final String title;
+  final String imageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -39,16 +70,19 @@ class TopSearchViw extends StatelessWidget {
         Container(
           width: width * 0.35,
           height: 70,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             image: DecorationImage(
-              image: NetworkImage(imageurl),
+              image: NetworkImage(imageUrl),
             ),
           ),
         ),
-        const Expanded(
+        Expanded(
           child: Text(
-            'Shazzam 2',
-            style: TextStyle(color: whitecolor, fontWeight: FontWeight.bold),
+            title,
+            style: const TextStyle(
+              color: whitecolor,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         const CircleAvatar(

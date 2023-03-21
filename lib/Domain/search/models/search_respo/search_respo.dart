@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:netflix_ui/core/sizedbox.dart';
 
 part 'search_respo.g.dart';
 
@@ -18,17 +19,15 @@ class SearchRespo {
 
 @JsonSerializable()
 class SearchResultdata {
-  @JsonKey(name: 'id')
-  int? id;
-
   @JsonKey(name: 'original_title')
   String? originalTitle;
 
   @JsonKey(name: 'poster_path')
   String? posterPath;
 
+  String get imageurl => '$imageAppenturl$posterPath';
+
   SearchResultdata({
-    this.id,
     this.originalTitle,
     this.posterPath,
   });
