@@ -11,7 +11,7 @@ import 'package:netflix_ui/presentaion/widgets/main_title_card.dart';
 import '../../Application/downloads/downloads_bloc.dart';
 
 ValueNotifier<bool> scrollnotifier = ValueNotifier(true);
-
+   //main
 class ScreenHome extends StatelessWidget {
   const ScreenHome({super.key});
 
