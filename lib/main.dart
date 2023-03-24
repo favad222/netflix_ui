@@ -6,7 +6,6 @@ import 'package:netflix_ui/Application/fast_laugh/fast_laugh_bloc.dart';
 import 'package:netflix_ui/Application/hot_and%20_new/hot_and_new_bloc.dart';
 import 'package:netflix_ui/Application/search/search_bloc.dart';
 import 'package:netflix_ui/Domain/core/di/injectable.dart';
-import 'package:netflix_ui/presentaion/main_page/widgets/main_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:netflix_ui/presentaion/splash/splashscreen.dart';
 

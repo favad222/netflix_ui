@@ -31,14 +31,14 @@ dependencies:
   bordered_text: null
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
-  dio: null
+  dio: 
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.2
   freezed_annotation: 2.2.0
   get_it: ^7.2.0
   google_fonts: ^4.0.3
-  injectable: null
+  injectable: 
   intl: ^0.18.0
   json_annotation: null
   share_plus: null

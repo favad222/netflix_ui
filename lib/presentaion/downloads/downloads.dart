@@ -12,8 +12,8 @@ class ScreenDownloads extends StatelessWidget {
   final widgets = [
     const SmartDownloads(),
     height,
-    Section2(),
-    const Section3()
+    const Section2(),
+    const Section3(),
   ];
 
   @override
@@ -99,13 +99,7 @@ class DownloadImge extends StatelessWidget {
 }
 
 class Section2 extends StatelessWidget {
-  Section2({super.key});
-
-  final imageList = [
-    'https://www.themoviedb.org/t/p/original/zpCCTtuQMHiHycpsrWnW2eCrBql.jpg',
-    'https://www.themoviedb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',
-    'https://www.themoviedb.org/t/p/original/kuf6dutpsT0vSVehic3EZIqkOBt.jpg'
-  ];
+  const Section2({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -143,19 +137,19 @@ class Section2 extends StatelessWidget {
                           ),
                         ),
                         DownloadImge(
-                          imageList: '$imageAppenturl${state.downloads?[0].posterpath}',
+                          imageList: '$imageAppenturl${state.downloads[0].posterpath}',
                           margin: const EdgeInsets.only(left: 170, top: 50),
                           angle: 15,
                           size: Size(size.width * 0.30, size.width * 0.48),
                         ),
                         DownloadImge(
-                          imageList: '$imageAppenturl${state.downloads?[1].posterpath}',
+                          imageList: '$imageAppenturl${state.downloads[1].posterpath}',
                           margin: const EdgeInsets.only(right: 170, top: 50),
                           angle: -15,
                           size: Size(size.width * 0.30, size.width * 0.48),
                         ),
                         DownloadImge(
-                          imageList: '$imageAppenturl${state.downloads?[2].posterpath}',
+                          imageList: '$imageAppenturl${state.downloads[2].posterpath}',
                           margin: const EdgeInsets.only(bottom: 10, top: 25),
                           size: Size(
                             size.width * 0.3,

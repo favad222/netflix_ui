@@ -9,7 +9,7 @@ import 'package:dio/dio.dart';
 @LazySingleton(as: IDownloadRepo)
 class DownloadRepository implements IDownloadRepo {
   @override
-  Future<Either<Mainfailure, List<Downloads>>> getdownloadsImages() async {
+  Future<Either<Mainfailure, List<Downloads>>>  getdownloadsImages() async {
     try {
       final Response response =
           await Dio(BaseOptions()).get(ApiEndPoint.downloads);
